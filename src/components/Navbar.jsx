@@ -5,7 +5,12 @@ function Navbar() {
   const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
 
-  const isActive = (path) => location.pathname === path
+  const isActive = (path) => {
+    if (path === '/') {
+      return location.pathname === '/' || location.pathname === ''
+    }
+    return location.pathname === path
+  }
 
   const navLinks = [
     { path: '/', label: 'Home' },
@@ -33,9 +38,9 @@ function Navbar() {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`transition-colors ${
+                className={`transition-colors py-2 px-1 ${
                   isActive(link.path)
-                    ? 'text-emerald-600 font-semibold'
+                    ? 'text-emerald-600 font-semibold border-b-2 border-emerald-600'
                     : 'text-gray-700 hover:text-emerald-600'
                 }`}
               >
